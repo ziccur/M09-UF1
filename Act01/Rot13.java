@@ -2,10 +2,13 @@
  * El xifrat ROT13 consisteix a substituir cada lletra per la que està 13 posicions més a la dreta
     alfabèticament, i si s’arriba al final de l’alfabet es torna a començar per el principi.
 */
+
+import java.util.Scanner;
+
 public class Rot13 {
 
-    private static final char[] minuscules = {'a', 'b', 'c' , 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    private static final char[] majuscules = {'A', 'B', 'C' ,'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    private static final char[] minuscules = {'a', 'à', 'b', 'c', 'ç', 'd', 'e', 'è', 'é', 'f', 'g', 'h', 'i', 'í', 'ï', 'j', 'k', 'l', 'm', 'n', 'o', 'ò', 'ó', 'p', 'q', 'r', 's', 't', 'u', 'ú', 'ü', 'v', 'w', 'x', 'y', 'z'};
+    private static final char[] majuscules = {'A', 'À', 'B', 'C', 'Ç', 'D', 'E', 'È', 'É', 'F', 'G', 'H', 'I', 'Í', 'Ï', 'J', 'K', 'L', 'M', 'N', 'O', 'Ò', 'Ó', 'P', 'Q', 'R', 'S', 'T', 'U', 'Ú', 'Ü', 'V', 'W', 'X', 'Y', 'Z'};
 
     private static int indexOf(char[] cadena, char caracter){
         for(int i = 0; i < cadena.length; i++){
@@ -35,6 +38,9 @@ public class Rot13 {
     }
 
     public static void main(String[] args){
-        System.out.println(xifraRot13("hola que tal".toCharArray()));
+        System.out.println("Introdueix un text per encriptar:");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(xifraRot13(scanner.nextLine()));
+        scanner.close();
     }
 }
