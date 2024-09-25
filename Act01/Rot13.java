@@ -21,14 +21,30 @@ public class Rot13 {
 
     public static String xifraRot13(String text){ return xifraRot13(text.toCharArray()); }
     public static String xifraRot13(char[] cadena){
+        return  translate(cadena, true);
+    }
+
+    public static String desxifraRot13( String text ){ return desxifraRot13( text.toCharArray()); }
+    public static String desxifraRot13( char[] cadena ){
+        return translate(cadena, false);
+    }
+
+    public static String translate( char[] cadena, boolean encrypt){
         String result = "";
         for (int i = 0; i < cadena.length; i++){
             if(Character.isLetter(cadena[i])){
                 if(Character.isUpperCase(cadena[i])){
-                    result += majuscules[(indexOf(majuscules, cadena[i]) + 13) % majuscules.length];
+                    if(encrypt){
+                        result += majuscules[(indexOf(majuscules, cadena[i]) + 13) % majuscules.length];
+                    }else{
+                        result += majuscules[(indexOf(majuscules, cadena[i]) - 13) % majuscules.length];
+                    }
                 } else {
-                    result += minuscules[(indexOf(minuscules, cadena[i]) + 13) % minuscules.length];
-
+                    if(encrypt){
+                        result += minuscules[(indexOf(minuscules, cadena[i]) + 13) % minuscules.length];
+                    }else{
+                        result += minuscules[(indexOf(minuscules, cadena[i]) - 13) % minuscules.length];
+                    }
                 }
             } else {
                 result += cadena[i];
@@ -38,9 +54,19 @@ public class Rot13 {
     }
 
     public static void main(String[] args){
-        System.out.println("Introdueix un text per encriptar:");
+        if(args.length == 0){
+            System.out.println("ERROR: parametro no indicat.\n Usa $java Rot13 encrypt/desencrypt ");
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
-        System.out.println(xifraRot13(scanner.nextLine()));
-        scanner.close();
+        if(args[0].equals("encrypt")){
+            System.out.println("Introdueix un text per encriptar:");
+            System.out.println(xifraRot13(scanner.nextLine()));
+            scanner.close();
+        }else if(args[0].equals("desencrypt")){
+            System.out.println("Introdueix un text per desencriptar:");
+            System.out.println(desxifraRot13(scanner.nextLine()));
+            scanner.close();
+        }
     }
 }
