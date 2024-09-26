@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Rot13 {
 
+    // Sugerencia: Les constants han d'anar amb majuscula per millor lectura
     private static final char[] minuscules = {'a', 'à', 'b', 'c', 'ç', 'd', 'e', 'è', 'é', 'f', 'g', 'h', 'i', 'í', 'ï', 'j', 'k', 'l', 'm', 'n', 'o', 'ò', 'ó', 'p', 'q', 'r', 's', 't', 'u', 'ú', 'ü', 'v', 'w', 'x', 'y', 'z'};
     private static final char[] majuscules = {'A', 'À', 'B', 'C', 'Ç', 'D', 'E', 'È', 'É', 'F', 'G', 'H', 'I', 'Í', 'Ï', 'J', 'K', 'L', 'M', 'N', 'O', 'Ò', 'Ó', 'P', 'Q', 'R', 'S', 'T', 'U', 'Ú', 'Ü', 'V', 'W', 'X', 'Y', 'Z'};
 
@@ -30,9 +31,9 @@ public class Rot13 {
     }
 
     public static String translate( char[] cadena, boolean encrypt){
-        String result = "";
+        String result = ""; // recomenació: al ser un string que es modifica tota l'estona utilitza sting buffed
         for (int i = 0; i < cadena.length; i++){
-            if(Character.isLetter(cadena[i])){
+            if(Character.isLetter(cadena[i])){ //sugerencia: buscartots els mòduls aprovats i mitjana notes >= 8 dirctament en les arrays de lletres per fer el codi més optim ja que retornaria la posició
                 if(Character.isUpperCase(cadena[i])){
                     if(encrypt){
                         result += majuscules[(indexOf(majuscules, cadena[i]) + 13) % majuscules.length];
