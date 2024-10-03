@@ -31,20 +31,31 @@ public class RotX {
     }
     public static String translate( String text, boolean encrypt, int desplaçament){ return translate(text.toCharArray(), encrypt, desplaçament);}
     public static String translate(char[] cadena, boolean encrypt, int desplaçament) {
+        if(desplaçament > MINUSCULES.length){
+            System.out.println("No es pot indicar un despaçament tant gran");
+            return null;
+        }
         StringBuilder result = new StringBuilder(); // recomenació: al ser un string que es modifica tota l'estona utilitza StringBuilder
         for (int i = 0; i < cadena.length; i++) {
             if (Character.isLetter(cadena[i])) { // sugerencia: buscartots els mòduls aprovats i mitjana notes >= 8 directament en les arrays de lletres per fer el codi més optim ja que retornaria la posició
+                
                 if (Character.isUpperCase(cadena[i])) {
+                    
+                    int index = indexOf(MAJUSCULES, cadena[i]);
+
                     if (encrypt) {
-                        result.append(MAJUSCULES[(indexOf(MAJUSCULES, cadena[i]) + desplaçament) % MAJUSCULES.length]);
+                        result.append(MAJUSCULES[(index + desplaçament) % MAJUSCULES.length]);
                     } else {
-                        result.append(MAJUSCULES[(indexOf(MAJUSCULES, cadena[i]) - desplaçament + MAJUSCULES.length) % MAJUSCULES.length]);
+                        result.append(MAJUSCULES[(index - desplaçament + MAJUSCULES.length) % MAJUSCULES.length]);
                     }
                 } else {
+
+                    int index = indexOf(MINUSCULES, cadena[i]);
+
                     if (encrypt) {
-                        result.append(MINUSCULES[(indexOf(MINUSCULES, cadena[i]) + desplaçament) % MINUSCULES.length]);
+                        result.append(MINUSCULES[(index + desplaçament) % MINUSCULES.length]);
                     } else {
-                        result.append(MINUSCULES[(indexOf(MINUSCULES, cadena[i]) - desplaçament + MINUSCULES.length) % MINUSCULES.length]);
+                        result.append(MINUSCULES[(index - desplaçament + MINUSCULES.length) % MINUSCULES.length]);
                     }
                 }
             } else {
@@ -61,17 +72,18 @@ public class RotX {
         }
     }
 
-
-
-
     public static void main(String[] args){
-        String fraseDeprova = "Hola que tal, sóc en Yeray!";
-        System.out.println("Aquest serà el text de prova que usarem: " + fraseDeprova);
+        final String[] FRASESDEPROVA = {"Hola com estas", "aàábcçdeèéfghiìíïjklmnñoöòópqrstuùúüvwxyz", "   1   ", "Seras ra$rit0", "¿¿Esto se descifra??!"};
 
-        String textTraduit = translate(fraseDeprova, true, 130);
-        System.out.println("Codificat:   " + textTraduit);
+        for (int i = 0; i < FRASESDEPROVA.length; i++ ){
+            int desplaçament = 12;
+            String fraseDeprova = FRASESDEPROVA[i];
+            System.out.println("Frase original: "+ fraseDeprova + " | Frase codificada: "+ xifraRotX(fraseDeprova, desplaçament) + " | Frase descompilada: " + desxifraRotX(xifraRotX(fraseDeprova, desplaçament), desplaçament));
+        }
 
-        forcaBrutaRotX(textTraduit);
+        String frase = "La última frase de prova existent";
+        System.out.println("\nLa frase original és:" + frase);
 
+        forcaBrutaRotX(xifraRotX(frase, 34));
     }
 }
