@@ -7,23 +7,20 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class AES {
 
-    // Definiciones a nivel de clase
     public static final String ALGORISME_XIFRAT = "AES";
     public static final String ALGORISME_HASH = "SHA-256";
     public static final String FORMAT_AES = "AES/CBC/PKCS5Padding";
     private static final int MIDA_IV = 16;
     private static byte[] iv = new byte[MIDA_IV];
-    private static final String CLAU = "LaClauSecretaQueVulguis"; // Puedes cambiarla si deseas
+    private static final String CLAU = "LaClauSecretaQueVulguis";
 
-    // Método para generar la clave a partir de la contraseña
     private static SecretKey generateKey(String password) throws Exception {
         MessageDigest sha = MessageDigest.getInstance(ALGORISME_HASH);
         byte[] key = password.getBytes("UTF-8");
         key = sha.digest(key);
-        return new SecretKeySpec(Arrays.copyOf(key, 32), ALGORISME_XIFRAT); // Clave de 256 bits
+        return new SecretKeySpec(Arrays.copyOf(key, 32), ALGORISME_XIFRAT);
     }
 
-    // Método para cifrar con AES
     public static byte[] xifraAES(String msg, String password) throws Exception {
         Cipher cipher = Cipher.getInstance(FORMAT_AES);
         SecretKey secretKey = generateKey(password);
@@ -32,7 +29,6 @@ public class AES {
         return cipher.doFinal(msg.getBytes("UTF-8"));
     }
 
-    // Método para descifrar con AES
     public static String desxifraAES(byte[] bMsgXifrat, String password) throws Exception {
         Cipher cipher = Cipher.getInstance(FORMAT_AES);
         SecretKey secretKey = generateKey(password);
@@ -42,7 +38,6 @@ public class AES {
         return new String(original, "UTF-8");
     }
 
-    // Método main
     public static void main(String[] args) {
         String msgs[] = {"Lorem ipsum dicet", "Hola Andrés cómo está tu cuñado", "Àgora ïlla Ôtto"};
         
