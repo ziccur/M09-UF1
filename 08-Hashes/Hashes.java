@@ -1,4 +1,3 @@
-package iticbcn.xifratge;
 
 import java.security.spec.KeySpec;
 
