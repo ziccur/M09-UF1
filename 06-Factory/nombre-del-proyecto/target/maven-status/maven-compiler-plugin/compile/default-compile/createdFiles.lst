@@ -4,10 +4,10 @@ iticbcn/xifratge/XifradorRotX.class
 iticbcn/xifratge/interfaces/Xifrador.class
 iticbcn/xifratge/XifradorPolialfabetic.class
 iticbcn/xifratge/classes_factoria/AlgorismeMonoalfabetic.class
-iticbcn/xifratge/exceptions/ClauNoSuportada.class
 iticbcn/xifratge/classes_factoria/AlgorismeAES.class
-iticbcn/xifratge/classes_factoria/AlgorismeFactory.class
+iticbcn/xifratge/exceptions/ClauNoSuportada.class
 iticbcn/xifratge/classes_factoria/AlgorismePolialfabetic.class
+iticbcn/xifratge/classes_factoria/AlgorismeFactory.class
 iticbcn/xifratge/App.class
 iticbcn/xifratge/XifradorAES.class
 iticbcn/xifratge/XifradorMonoalfabetic.class
